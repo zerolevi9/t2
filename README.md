@@ -4,7 +4,7 @@ Este sistema simula o fluxo de atendimento em um hospital, incluindo a chegada d
 
 ## Funcionalidades Principais
 
-1. Geração de Pacientes
+### 1. Geração de Pacientes
 Utiliza funções para gerar aleatoriamente nomes, CPFs, idades e informações de pacientes.
 
 Função de Geração de Nomes Aleatórios:
@@ -19,7 +19,7 @@ A função gerarIdade é responsável por gerar aleatoriamente idades para os pa
 Função de Geração de Pacientes Aleatórios:
 A função gerarPaciente é responsável por criar um paciente com informações geradas aleatoriamente. Essa função utiliza as funções anteriores para gerar nomes, CPFs e idades, criando um paciente com dados variados.
 
-2. Atendimento na Sala de Espera
+### 2. Atendimento na Sala de Espera
 Pacientes são adicionados à fila de espera e ordenados por gravidade da doença.
 
 Inicialização da Fila de Espera:
@@ -31,7 +31,7 @@ A função insere é responsável por adicionar pacientes à fila de espera de f
 Ordenação por Gravidade da Doença:
 A ordenação é realizada com base na gravidade da doença do paciente, que é representada pela coluna na estrutura do paciente. A função de comparação utilizada na ordenação compara a gravidade da doença dos pacientes.
 
-3. Atendimento no Raio-X
+### 3. Atendimento no Raio-X
 Pacientes são encaminhados para a máquina de raio-X quando disponível. A matriz raioX do hospital registra o status das máquinas.
 
 Encaminhamento para Máquina de Raio-X:
@@ -43,7 +43,7 @@ O hospital utiliza uma matriz para registrar o status das máquinas de raio-X. Q
 Atualização de Tempo:
 O sistema atualiza dinamicamente o tempo de uso de cada máquina de raio-X na matriz, refletindo o progresso do exame. Quando o tempo de uso de uma máquina de raio-X atinge zero, indicando a conclusão do exame, o sistema atualiza o status da máquina e o remove da fila de raio-X.
 
-4. Atendimento no Laudo
+### 4. Atendimento no Laudo
 Pacientes são encaminhados para a sala de laudo quando o raio-X é concluído. A matriz laudo do hospital registra o status das salas de laudo.
 
 Encaminhamento para Sala de Laudo:
@@ -55,7 +55,7 @@ O hospital utiliza uma matriz para registrar o status das salas de laudo. Quando
 Atualização de Tempo:
 O sistema atualiza dinamicamente o tempo de uso de cada sala de laudo na matriz, refletindo o progresso do atendimento. Quando o tempo de uso de uma sala de laudo atinge zero, indicando a conclusão do laudo, o sistema atualiza o status da sala e o remove da fila de laudo. 
 
-5. Controle de Tempo e Métricas
+### 5. Controle de Tempo e Métricas
 O sistema controla o tempo de espera e o tempo de atendimento em cada etapa. Calcula métricas, como a média de tempo para laudo, média de tempo por patologia e número de exames fora do tempo.
 
 Controle de Tempo de Atendimento
