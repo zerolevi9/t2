@@ -71,3 +71,9 @@ O tempo de saída da fila de raio-X é registrado quando o paciente inicia o pro
 Atendimento no Laudo:
 O tempo de entrada na fila de laudo é registrado quando o paciente é encaminhado para a sala de laudo.
 O tempo de saída da fila de laudo é registrado quando o médico conclui o laudo.
+
+
+### Observações
+O sistema é uma simulação simplificada e não leva em consideração detalhes específicos de um ambiente hospitalar real.
+As métricas e tempos são apresentados a cada 10 unidades de tempo.
+O código inclui comentários explicativos para facilitar a compreensão.
