@@ -2,7 +2,7 @@
 
 all: main
 
-main: main.o logging.o
+main: main.o fila.o
 	gcc -o main main.o fila.o
 
 main.o: main.c fila.h
