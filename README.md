@@ -21,7 +21,7 @@ Este arquivo contém as definições das estruturas de dados utilizadas no proje
 >[!IMPORTANT]
 > Para compilar o projeto, você pode usar um compilador C, e executar o makefile, logo após inserir o nome do documento em _.txt_ presente neste repositório
 
-Certifique-se de que todos os arquivos (main.c, fila.c, fila.h) estejam no mesmo diretório.
+Certifique-se de que todos os arquivos (main.c, fila.c, fila.h e arquivo de texto) estejam no mesmo diretório.
 
 ### Observações
 O sistema é uma simulação simplificada e não leva em consideração detalhes específicos de um ambiente hospitalar real.
