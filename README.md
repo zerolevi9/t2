@@ -18,7 +18,7 @@ Este arquivo contém as implementações das funções relacionadas às estrutur
 Este arquivo contém as definições das estruturas de dados utilizadas no projeto e as assinaturas das funções implementadas em fila.c. Ele serve como uma interface para que as funções em main.c possam utilizar as estruturas e operações definidas em fila.c.
 
 ## Compilação e Execução
-[!IMPORTANT]
+>[!IMPORTANT]
 > Para compilar o projeto, você pode usar um compilador C, e executar o makefile, logo após inserir o nome do documento em _.txt_ presente neste repositório
 
 Certifique-se de que todos os arquivos (main.c, fila.c, fila.h) estejam no mesmo diretório.
