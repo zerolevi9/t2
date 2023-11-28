@@ -1,120 +1,77 @@
 #ifndef FILA_H
 #define FILA_H
 
-typedef struct node Node;
-typedef struct lista Lista;
-typedef struct fila Fila;
-typedef struct paciente Paciente;
-typedef struct hospital Hospital;
+typedef struct QueueExams QueueExams;
+typedef struct ExamRecord ExamRecord; 
 
-// Estruturas e funções relacionadas à Lista Encadeada
+typedef struct Patient patient; 
+typedef struct ListOfPatients ListPatient; 
 
-// Função para inicializar uma lista encadeada vazia
-Lista *inicia_Lista();
+typedef struct ListOfMachines ListMachines;
+typedef struct Machines Machines;
 
-// Função para adicionar um elemento no início da lista encadeada
-void insere_Lista(Lista *lista, void *dados);
+typedef struct QueueReport QueueReport; 
+typedef struct Pathologies Pathologie; 
 
-// Função que remove um valor da lista
-void remove_dados_lista(Lista *l, void *val);
+typedef struct ListOfRadiologist ListRadiologist; 
+typedef struct Radiologist Radiologist; 
 
-// Função para liberar a memória alocada para a lista encadeada
-void liberaLista(Lista *lista);
+typedef struct list_node ListNode;   
+typedef struct Queue_Node QueueNode; 
 
-// Estruturas e funções relacionadas à Fila
 
-// Função para inicializar uma fila vazia
-Fila *inicia_Fila();
+patient *newPatient(char *name, char *cpf, int age, int id); 
+ListPatient *ListPatient_create(); 
+int ListPatient_size(ListPatient *list); 
+int ListEmpty(ListPatient *list); 
+void ListPatient_insert(ListPatient *list, patient *patients); 
+int ListPatient_remove(ListPatient *list, patient *patients); 
+void ListPatient_free(ListPatient *list); 
 
-// Função que remove um valor da fila
-void remove_dados_fila(Fila *fila);
 
-// Função para liberar a memória alocada para a fila
-void liberaFila(Fila *fila);
+QueueExams *QueueExams_create(); 
+int QueueEmpty(QueueExams *q); 
+void QueueEnqueue(QueueExams *q, int newID); 
+void QueueDequeue(QueueExams *q); 
+void QueueFree(QueueExams *q); 
 
-// Estruturas e funções relacionadas ao Hospital
+QueueReport *QueueReport_create(); 
+int QueueReportEmpty(QueueReport *q); 
+void Exam_Record(QueueReport *report, ListMachines *m, int time); 
+Pathologie *Assessing_Pathologies(); 
 
-// Função para inicializar a estrutura do hospital
-Hospital *inicia_Hospital();
 
-// Função que libera a memória alocada para a estrutura do hospital
-void liberaHospital(Hospital *hospital);
+int ListEmpty_Radiologist(ListRadiologist *r); 
+ListRadiologist *Radiologist_create(); 
+void initializeRadiologist(int qtd, ListRadiologist *r); 
+void insert_radio(ListRadiologist *r, QueueReport *patient, int time); 
+void remove_radio(ListRadiologist *r,int time); 
 
-// Funções relacionadas à probabilidade
 
-// Função que determina se haverá paciente
-int probabilidade_paciente();
+void patient_print(ListPatient *l); 
+void QueueExams_print(QueueExams *exams); 
+void machine_print(ListMachines *machine);
+void QueueReport_print(QueueReport *r); 
+void radio_print(ListRadiologist *radio); 
 
-// Função que determina a patologia do paciente
-int *probabilidade_patologia();
 
-// Funções relacionadas a probabilidades de tempo para exames
+void listpatient_free(ListPatient *p); 
+void listmach_free(ListMachines *mach); 
+void listradiologist_free(ListRadiologist *radio); 
+void qexam_free(QueueExams *exam); 
+void qreport_free(QueueReport *report); 
 
-// Gera um número entre 5 e 10, em unidades de tempo, para pegar o raio-x
-int probabilidade_raiox();
 
-// Gera um número entre 10 e 30, em unidades de tempo, para pegar o laudo
-int probabilidade_laudo();
+int total_path(QueueReport *r, const char *p); 
+int tempWait_path(QueueReport *r, const char *p); 
+int examsBeyondTimeLimit(QueueReport *report, int timeLimit); 
+float averageReportTime(QueueReport *report); 
 
-// Funções relacionadas à geração aleatória de informações pessoais
+int ListEmpty_Machines(ListMachines *m); 
+ListMachines *ListMachines_create();    
+void initializeMachines(int qtd, ListMachines *m); 
+void insert_machines(ListMachines *m, QueueExams *patient, int time);
 
-// Gera aleatoriamente um nome
-char *gerarNome();
 
-// Gera aleatoriamente um CPF
-char *gerarCPF();
 
-// Gera aleatoriamente uma idade entre 18 e 99 anos
-int gerarIdade();
-
-// Gera aleatoriamente um paciente
-Paciente *gerarPaciente(int ID);
-
-// Funções relacionadas ao atendimento nas filas
-
-// Coloca na fila do raio-x
-void fila_atendimento_raiox(Fila *fila_SE, Fila *raiox, Hospital *hospital, int unidade_de_tempo);
-
-// Atualiza o tempo para terminar o raio-x
-void fila_atendimento_laudo(Fila *fila_raiox, Fila *laudo, Hospital *hospital, int unidade_de_tempo);
-
-// Atualiza o tempo para terminar o raio-x e verifica se o exame terminou
-void atualiza_tempo_raiox(Hospital *hospital);
-
-// Atualiza o tempo para terminar o laudo e verifica se terminou o atendimento
-void atualiza_tempo_laudo(Hospital *hospital);
-
-// Atualiza o tempo de saída do paciente no raio-x e o retira do raio-x
-void atualiza_raiox(Hospital *hospital, Fila *fila_raiox, int unidade_de_tempo);
-
-// Atualiza o tempo de saída do paciente da sala de laudo e o retira da sala de laudo
-void atualiza_laudo(Hospital *hospital, Fila *fila_laudo, int unidade_de_tempo);
-
-// Funções de verificação de disponibilidade de recursos
-
-// Verifica se há máquina de raio x disponível
-int verifica_raiox(Hospital *hospital);
-
-// Verifica se há médico disponível e se o paciente já passou no raio x
-int verifica_laudo(Hospital *hospital);
-
-// Função para atualizar a contagem de tempo dos pacientes
-void atualiza_lista_controle(Fila *fila_laudo, Lista *lista_controle);
-
-// Funções relacionadas a métricas e estatísticas
-
-// Pega a média de tempo para se ter o laudo
-float media_laudo(Lista *controle);
-
-// Pega a média de tempo para se ter o laudo por patologia
-void media_patologias(Lista *controle, Hospital *hospital);
-
-// Retorna o número de exames que demoraram mais de 7200 U.T (Unidades de Tempo)
-int exames_apos_tempo(Lista *controle);
-
-// Função que imprime as métricas
-void printa_metrica(Lista *controle, Hospital *hospital);
-
-// Função para inserir paciente ordenadamente na fila pela gravidade
-void insere_ordenado(Fila *lista, Paciente *novo_paciente);
 #endif
