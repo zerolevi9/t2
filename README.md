@@ -2,76 +2,26 @@
 
 Este sistema simula o fluxo de atendimento em um hospital, incluindo a chegada de pacientes, a realização de exames de raio-x, a emissão de laudos médicos e métricas de desempenho do atendimento.
 
-## Funcionalidades Principais
+## Overview
+Este conjunto de códigos em C implementa um sistema de simulação de um hospital, onde são realizados exames médicos e laudos por radiologistas. O sistema simula a chegada de pacientes, a alocação de máquinas para exames, a geração de laudos e métricas relacionadas ao tempo de espera e eficiência do processo.
 
-### 1. Geração de Pacientes
-Utiliza funções para gerar aleatoriamente nomes, CPFs, idades e informações de pacientes.
+## Estrutura do Projeto
+O projeto é dividido em três arquivos principais: _main.c_, _fila.c_, e _fila.h_. Abaixo está uma breve descrição de cada um desses arquivos:
 
-Função de Geração de Nomes Aleatórios:
-A função é responsável por gerar aleatoriamente nomes para os pacientes. A lista de nomes pré-definida é utilizada, e um índice aleatório é escolhido para selecionar um nome da lista.
+**main.c**
+Este é o arquivo principal que contém a função main. Ele é responsável por inicializar as estruturas de dados, simular a passagem do tempo e chamar funções relacionadas à chegada de pacientes, alocação de máquinas, geração de laudos, entre outras. Também contém a lógica para calcular métricas relacionadas ao tempo médio de laudo, tempo médio por patologia, e a quantidade de exames realizados após o limite de tempo estabelecido.
 
-Função de Geração de CPFs Aleatórios:
-A função gerarCPF é responsável por gerar aleatoriamente CPFs para os pacientes. Números aleatórios são utilizados para criar partes do CPF, simulando a diversidade de números presentes nos CPFs reais. 
+**fila.c**
+Este arquivo contém as implementações das funções relacionadas às estruturas de dados utilizadas no projeto, como a lista de pacientes, fila de exames, lista de máquinas, fila de laudos, lista de radiologistas, entre outras. Ele também contém funções para realizar operações como a alocação de máquinas, geração de laudos, verificação da disponibilidade de máquinas e radiologistas, entre outras.
 
-Função de Geração Aleatória de Idades:
-A função gerarIdade é responsável por gerar aleatoriamente idades para os pacientes. Um número aleatório é gerado e limitado ao intervalo entre 18 e 99 anos, representando uma faixa etária diversificada.
+**fila.h**
+Este arquivo contém as definições das estruturas de dados utilizadas no projeto e as assinaturas das funções implementadas em fila.c. Ele serve como uma interface para que as funções em main.c possam utilizar as estruturas e operações definidas em fila.c.
 
-Função de Geração de Pacientes Aleatórios:
-A função gerarPaciente é responsável por criar um paciente com informações geradas aleatoriamente. Essa função utiliza as funções anteriores para gerar nomes, CPFs e idades, criando um paciente com dados variados.
+## Compilação e Execução
+[!IMPORTANT]
+> Para compilar o projeto, você pode usar um compilador C, e executar o makefile, logo após inserir o nome do documento em _.txt_ presente neste repositório
 
-### 2. Atendimento na Sala de Espera
-Pacientes são adicionados à fila de espera e ordenados por gravidade da doença.
-
-Inicialização da Fila de Espera:
-A fila de espera é inicializada como uma lista encadeada vazia, preparada para receber os pacientes.
-
-Adição à Fila de Espera:
-A função insere é responsável por adicionar pacientes à fila de espera de forma ordenada pela gravidade da doença. Os pacientes são adicionados de forma ordenada, garantindo que aqueles com maior gravidade da doença ocupem as posições iniciais da fila. 
-
-Ordenação por Gravidade da Doença:
-A ordenação é realizada com base na gravidade da doença do paciente, que é representada pela coluna na estrutura do paciente. A função de comparação utilizada na ordenação compara a gravidade da doença dos pacientes.
-
-### 3. Atendimento no Raio-X
-Pacientes são encaminhados para a máquina de raio-X quando disponível. A matriz raioX do hospital registra o status das máquinas.
-
-Encaminhamento para Máquina de Raio-X:
-A função fila de atendimento é responsável por encaminhar pacientes da fila de sala de espera para a máquina de raio-X quando esta está disponível. Essa função é chamada periodicamente para verificar a disponibilidade de máquinas de raio-X e encaminhar pacientes conforme necessário.
-
-Registro na Matriz de Raio-X:
-O hospital utiliza uma matriz para registrar o status das máquinas de raio-X. Quando um paciente é encaminhado para a máquina de raio-X, o sistema atualiza a matriz de raio-X com informações relevantes.
-
-Atualização de Tempo:
-O sistema atualiza dinamicamente o tempo de uso de cada máquina de raio-X na matriz, refletindo o progresso do exame. Quando o tempo de uso de uma máquina de raio-X atinge zero, indicando a conclusão do exame, o sistema atualiza o status da máquina e o remove da fila de raio-X.
-
-### 4. Atendimento no Laudo
-Pacientes são encaminhados para a sala de laudo quando o raio-X é concluído. A matriz laudo do hospital registra o status das salas de laudo.
-
-Encaminhamento para Sala de Laudo:
-Quando um paciente completa o procedimento de raio-X, o sistema verifica a disponibilidade na sala de laudo e o encaminha para lá. Essa função é chamada periodicamente para verificar se há pacientes na fila de raio-X que podem ser encaminhados para a sala de laudo.
-
-Registro na Matriz de Laudo:
-O hospital utiliza uma matriz para registrar o status das salas de laudo. Quando um paciente é encaminhado para a sala de laudo, o sistema atualiza a matriz de laudo com informações relevantes.
-
-Atualização de Tempo:
-O sistema atualiza dinamicamente o tempo de uso de cada sala de laudo na matriz, refletindo o progresso do atendimento. Quando o tempo de uso de uma sala de laudo atinge zero, indicando a conclusão do laudo, o sistema atualiza o status da sala e o remove da fila de laudo. 
-
-### 5. Controle de Tempo e Métricas
-O sistema controla o tempo de espera e o tempo de atendimento em cada etapa. Calcula métricas, como a média de tempo para laudo, média de tempo por patologia e número de exames fora do tempo.
-
-Controle de Tempo de Atendimento
-O tempo de atendimento é controlado em cada etapa do processo:
-
-Chegada na Sala de Espera:
-Ao entrar na sala de espera, o sistema registra o timestamp de entrada do paciente.
-
-Atendimento no Raio-X:
-Quando um paciente é encaminhado para o raio-X, o sistema registra o tempo de entrada na fila de raio-X.
-O tempo de saída da fila de raio-X é registrado quando o paciente inicia o procedimento de raio-X.
-
-Atendimento no Laudo:
-O tempo de entrada na fila de laudo é registrado quando o paciente é encaminhado para a sala de laudo.
-O tempo de saída da fila de laudo é registrado quando o médico conclui o laudo.
-
+Certifique-se de que todos os arquivos (main.c, fila.c, fila.h) estejam no mesmo diretório.
 
 ### Observações
 O sistema é uma simulação simplificada e não leva em consideração detalhes específicos de um ambiente hospitalar real.
